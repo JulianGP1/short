@@ -1,7 +1,6 @@
 package javaapplication1;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 class Persona {
     String nombre;
@@ -14,7 +13,6 @@ class Persona {
 
     @Override
     public String toString() {
-        
         return nombre + " (" + edad + " años)";
     }
 }
@@ -26,13 +24,17 @@ public class JavaApplication1 {
             {new Persona("Luis", 40), new Persona("Beatriz", 20)}
         };
 
-        // Ordenar las filas por la edad de la primera persona en cada fila (sin lambda)
-        Arrays.sort(matriz, new Comparator<Persona[]>() {
-            @Override
-            public int compare(Persona[] fila1, Persona[] fila2) {
-                return Integer.compare(fila1[0].edad, fila2[0].edad);
+        // Ordenar las filas usando Bubble Sort sin Comparator
+        for (int i = 0; i < matriz.length - 1; i++) {
+            for (int j = 0; j < matriz.length - 1 - i; j++) {
+                if (matriz[j][0].edad > matriz[j + 1][0].edad) {
+                    // Intercambiar filas
+                    Persona[] temp = matriz[j];
+                    matriz[j] = matriz[j + 1];
+                    matriz[j + 1] = temp;
+                }
             }
-        });
+        }
 
         // Imprimir matriz ordenada
         for (Persona[] fila : matriz) {
