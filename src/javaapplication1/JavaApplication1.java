@@ -1,6 +1,7 @@
 package javaapplication1;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 class Persona {
     String nombre;
@@ -20,12 +21,17 @@ class Persona {
 public class JavaApplication1 {
     public static void main(String[] args) {
         Persona[][] matriz = {
-            {new Persona("Carlos", 19), new Persona("Ana", 25)},
+            {new Persona("Carlos", 16), null},
             {new Persona("Luis", 40), new Persona("Beatriz", 20)}
         };
 
-        // Ordenar las filas por la edad de la primera persona en cada fila
-        Arrays.sort(matriz, (fila1, fila2) -> Integer.compare(fila1[0].edad, fila2[0].edad));
+        // Ordenar las filas por la edad de la primera persona en cada fila (sin lambda)
+        Arrays.sort(matriz, new Comparator<Persona[]>() {
+            @Override
+            public int compare(Persona[] fila1, Persona[] fila2) {
+                return Integer.compare(fila1[0].edad, fila2[0].edad);
+            }
+        });
 
         // Imprimir matriz ordenada
         for (Persona[] fila : matriz) {
